@@ -11,6 +11,7 @@ router.post('/', userController.addUser);
 
 router.get('/eligible', userController.getEligibleUsers);
 
-router.get('/update', userController.updateUserDetails);
+// changed from get to put 
+router.put('/update', userController.updateUserDetails);
 
 module.exports = router;
