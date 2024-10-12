@@ -1,9 +1,7 @@
 const express = require('express'); // remove extra express import
 const connectDB = require('./db/connection');
 const userRoutes = require('./routes/users');
-
-//correct import
-const votingBoothRoutes = require('./db/schema/votingBoothSchema');
+const votingBoothRoutes = require('./routes/votingBooth');
 
 const app = express();
 

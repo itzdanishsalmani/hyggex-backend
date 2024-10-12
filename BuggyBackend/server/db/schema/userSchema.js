@@ -16,8 +16,14 @@ const userSchema = new mongoose.Schema({
   eligibleForVoting: {
     type: String,
     enum: ['eligible', 'not eligible'],
+    
+    //added age check function when inserting user
     default: function () {
-      return 'eligible';
+      if(this.age<18){
+        return 'not eligible'
+      }else{
+        return 'eligible'
+      }
     }
   }
 });

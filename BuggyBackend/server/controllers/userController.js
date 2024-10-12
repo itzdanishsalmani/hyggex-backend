@@ -50,8 +50,10 @@ exports.getEligibleUsers = async (req, res) => {
         //added return 
         return res.status(404).json({ message: 'No eligible users found' });
       }
+
+      let eligibleVoterCount = eligibleUsers.length
       // added return, it will send the eligible users
-      return res.json(eligibleUsers)
+      return res.json({eligibleVoterCount,eligibleUsers})
   
     } catch (error) {
       //added return 
@@ -83,8 +85,16 @@ exports.getEligibleUsers = async (req, res) => {
       // updating 
       user.name = name || user.name;
       user.email = email || user.email;
-      user.age = age || user.age;
-
+      if (age !== undefined) {
+        user.age = age;
+  
+        // Update eligibility based on the new age
+        if (user.age >= 18) {
+          user.eligibleForVoting = 'eligible';
+        } else {
+          user.eligibleForVoting = 'not eligible';
+        }
+      }
       await user.save();
 
       //added return 
